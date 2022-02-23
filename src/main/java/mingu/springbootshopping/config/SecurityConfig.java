@@ -1,8 +1,7 @@
-package mingu.springbootshopping.confog;
+package mingu.springbootshopping.config;
 
 import lombok.RequiredArgsConstructor;
 import mingu.springbootshopping.service.MemberService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

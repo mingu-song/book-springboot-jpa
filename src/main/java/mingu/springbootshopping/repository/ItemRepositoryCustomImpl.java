@@ -6,6 +6,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import mingu.springbootshopping.constant.ItemSellStatus;
 import mingu.springbootshopping.dto.ItemSearchDto;
 import mingu.springbootshopping.dto.MainItemDto;
+import mingu.springbootshopping.dto.QMainItemDto;
 import mingu.springbootshopping.entity.Item;
 import mingu.springbootshopping.entity.QItem;
 import mingu.springbootshopping.entity.QItemImg;
@@ -82,31 +83,30 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
         return StringUtils.isEmpty(searchQuery) ? null : QItem.item.itemNm.like("%" + searchQuery + "%");
     }
 
-//    @Override
-//    public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto, Pageable pageable) {
-//        QItem item = QItem.item;
-//        QItemImg itemImg = QItemImg.itemImg;
-//
-//        QueryResults<MainItemDto> results = queryFactory
-//                .select(
-//                        new QMainItemDto(
-//                                item.id,
-//                                item.itemNm,
-//                                item.itemDetail,
-//                                itemImg.imgUrl,
-//                                item.price)
-//                )
-//                .from(itemImg)
-//                .join(itemImg.item, item)
-//                .where(itemImg.repimgYn.eq("Y"))
-//                .where(itemNmLike(itemSearchDto.getSearchQuery()))
-//                .orderBy(item.id.desc())
-//                .offset(pageable.getOffset())
-//                .limit(pageable.getPageSize())
-//                .fetchResults();
-//
-//        List<MainItemDto> content = results.getResults();
-//        long total = results.getTotal();
-//        return new PageImpl<>(content, pageable, total);
-//    }
+    @Override
+    public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto, Pageable pageable) {
+        QItem item = QItem.item;
+        QItemImg itemImg = QItemImg.itemImg;
+
+        List<MainItemDto> content = queryFactory
+                .select(
+                        new QMainItemDto(
+                                item.id,
+                                item.itemNm,
+                                item.itemDetail,
+                                itemImg.imgUrl,
+                                item.price)
+                )
+                .from(itemImg)
+                .join(itemImg.item, item)
+                .where(itemImg.repimgYn.eq("Y"))
+                .where(itemNmLike(itemSearchDto.getSearchQuery()))
+                .orderBy(item.id.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+
+        long total = content.size();
+        return new PageImpl<>(content, pageable, total);
+    }
 }

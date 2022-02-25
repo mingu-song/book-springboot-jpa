@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import mingu.springbootshopping.dto.ItemFormDto;
 import mingu.springbootshopping.dto.ItemImgDto;
 import mingu.springbootshopping.dto.ItemSearchDto;
+import mingu.springbootshopping.dto.MainItemDto;
 import mingu.springbootshopping.entity.Item;
 import mingu.springbootshopping.entity.ItemImg;
 import mingu.springbootshopping.repository.ItemImgRepository;
@@ -85,9 +86,9 @@ public class ItemService {
         return itemRepository.getAdminItemPage(itemSearchDto, pageable);
     }
 
-//    @Transactional(readOnly = true)
-//    public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
-//        return itemRepository.getMainItemPage(itemSearchDto, pageable);
-//    }
+    @Transactional(readOnly = true)
+    public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
+        return itemRepository.getMainItemPage(itemSearchDto, pageable);
+    }
 
 }

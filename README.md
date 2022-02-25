@@ -1,6 +1,6 @@
 # 스프링 부트 쇼핑몰 프로젝트 with JPA
 
-* 일부 예제를 따라 해봄 (maven -> gradle)
+* spring boot 2.6.3 + java 11 + gradle 로 수정
 * 원본 github :: https://github.com/roadbook2/shop
 * 로컬 mysql 은 도커로 실행
 ```dockerfile
@@ -23,3 +23,4 @@ services:
     volumes:
       - C:\dev\docker\mysql\data:/var/lib/mysql
 ```
+* 정말 간단한 예제로 만들어진 프로젝트이며, 실무에 적용하는 것이 아닌 기본을 돌아보는 기회로 생각함
